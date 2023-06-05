@@ -1,8 +1,9 @@
 package com.example.market.service;
 
-import com.example.market.mapper.MyMapper;
-import com.example.market.model.request.ComputerCreateDTO;
 import com.example.market.entity.Computer;
+import com.example.market.exception.NotFoundException;
+import com.example.market.mapper.GenericMapper;
+import com.example.market.model.request.ComputerCreateDTO;
 import com.example.market.repository.ComputerRepository;
 import com.example.market.service.base.AbstractService;
 import com.example.market.service.base.GenericCRUDService;
@@ -10,11 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ComputerService extends AbstractService<ComputerRepository>
         implements GenericCRUDService<ComputerCreateDTO, Computer, Long>,
-        MyMapper<Computer, ComputerCreateDTO> {
+        GenericMapper<Computer, ComputerCreateDTO> {
 
     public ComputerService(ComputerRepository repository) {
         super(repository);
@@ -31,8 +33,8 @@ public class ComputerService extends AbstractService<ComputerRepository>
     @Override
     @Transactional
     public Computer get(Long key) {
-        Computer computer = repository.getReferenceById(key);
-        return computer;
+        Optional<Computer> computerOptional = repository.findById(key);
+        return computerOptional.orElseThrow(() -> new NotFoundException("COMPUTER_NOT_FOUND"));
     }
 
     @Override
@@ -42,8 +44,9 @@ public class ComputerService extends AbstractService<ComputerRepository>
     }
 
     @Override
-    public Computer update(Computer computer) {
-        Computer updatedComputer = repository.save(computer);
+    public Computer update(Computer updatingEntity) {
+        get(updatingEntity.getId());
+        Computer updatedComputer = repository.save(updatingEntity);
         return updatedComputer;
     }
 

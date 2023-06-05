@@ -7,7 +7,7 @@ import com.example.market.model.base.BaseDTO;
  * @param <E>  Entity
  * @param <CD> Create DTO
  */
-public interface MyMapper<E extends BaseEntity, CD extends BaseDTO> {
+public interface GenericMapper<E extends BaseEntity, CD extends BaseDTO> {
 
      E toEntity(CD createDTO);
 

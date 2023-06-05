@@ -2,42 +2,41 @@ package com.example.market.controller;
 
 import com.example.market.controller.base.AbstractController;
 import com.example.market.controller.base.GenericCRUDController;
-import com.example.market.model.request.ComputerCreateDTO;
+import com.example.market.entity.Monitor;
+import com.example.market.model.request.MonitorCreateDTO;
 import com.example.market.model.response.ResponseData;
-import com.example.market.entity.Computer;
-import com.example.market.service.ComputerService;
+import com.example.market.service.MonitorService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/computer")
-public class ComputerController extends AbstractController<ComputerService>
-        implements GenericCRUDController<ComputerCreateDTO, Computer, Long> {
+@RequestMapping("/monitor")
+public class MonitorController extends AbstractController<MonitorService>
+        implements GenericCRUDController<MonitorCreateDTO, Monitor, Long> {
 
-
-    public ComputerController(ComputerService service) {
+    public MonitorController(MonitorService service) {
         super(service);
     }
 
     @Override
-    public ResponseData<Computer> create(ComputerCreateDTO createDTO) {
+    public ResponseData<Monitor> create(MonitorCreateDTO createDTO) {
         return new ResponseData<>(service.create(createDTO));
     }
 
     @Override
-    public ResponseData<Computer> get(Long id) {
+    public ResponseData<Monitor> get(Long id) {
         return new ResponseData<>(service.get(id));
     }
 
     @Override
-    public ResponseData<List<Computer>> list() {
+    public ResponseData<List<Monitor>> list() {
         return new ResponseData<>(service.list());
     }
 
     @Override
-    public ResponseData<Computer> update(Computer updatingEntity) {
+    public ResponseData<Monitor> update(Monitor updatingEntity) {
         return new ResponseData<>(service.update(updatingEntity));
     }
 

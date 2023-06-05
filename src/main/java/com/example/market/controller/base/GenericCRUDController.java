@@ -28,7 +28,7 @@ public interface GenericCRUDController<CD extends BaseDTO, E extends BaseEntity,
     ResponseData<List<E>> list();
 
     @RequestMapping(value = BaseUtils.UPDATE_PATH, method = RequestMethod.PUT)
-    ResponseData<E> update(E entity);
+    ResponseData<E> update(E updatingEntity);
 
     @RequestMapping(value = BaseUtils.DELETE_PATH, method = RequestMethod.DELETE)
     ResponseData<Boolean> delete(@PathVariable K id);

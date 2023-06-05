@@ -19,4 +19,14 @@ public class GlobalExceptionHandler {
         return new ResponseData<>(errorDTO, HttpStatus.CONFLICT.value());
     }
 
+    @ExceptionHandler({NotFoundException.class})
+    public ResponseData<?> valid(NotFoundException ex, WebRequest request) {
+        APIErrorDTO errorDTO = APIErrorDTO.builder()
+                .developerMessage(ex.getStackTrace().toString())
+                .message(ex.getMessage())
+                .path(request.getContextPath())
+                .build();
+        return new ResponseData<>(errorDTO, HttpStatus.NOT_FOUND.value());
+    }
+
 }

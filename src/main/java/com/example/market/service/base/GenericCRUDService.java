@@ -17,13 +17,13 @@ public interface GenericCRUDService<CD extends BaseDTO,
         E extends BaseEntity,
         K extends Serializable>  {
 
-    E create(CD DTO);
+    E create(CD createDTO);
 
     E get(K key);
 
     List<E> list();
 
-    E update(E DTO);
+    E update(E updatingEntity);
 
     Boolean delete(K key);
 }

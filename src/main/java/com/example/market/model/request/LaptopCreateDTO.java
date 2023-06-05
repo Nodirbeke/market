@@ -1,6 +1,6 @@
 package com.example.market.model.request;
 
-import com.example.market.model.base.BaseDTO;
+import com.example.market.enums.LaptopSize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +10,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class  BaseCreateDto implements BaseDTO {
+public class LaptopCreateDTO extends BaseCreateDto {
 
-    private Long serialNumber;
-
-    private Double cost;
-
-    private String producer;
-
-    private Integer count;
+    private LaptopSize laptopSize;
 
 }
