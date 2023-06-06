@@ -2,6 +2,8 @@ package com.example.market.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Entity
@@ -10,14 +12,14 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Monitor extends BaseEntityParameter{
+public class Monitor extends BaseEntity {
+
+
+    @OneToOne
+    @JoinColumn
+    private Product product;
 
     @Column
     private Integer diameter;
 
-    @Builder(builderMethodName = "childBuilder")
-    public Monitor(Long id, Long serialNumber, Double cost, String producer, Integer count, Integer diameter) {
-        super(id, serialNumber, cost, producer, count);
-        this.diameter = diameter;
-    }
 }

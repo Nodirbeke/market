@@ -3,6 +3,8 @@ package com.example.market.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Entity
@@ -11,15 +13,15 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class HDD extends BaseEntityParameter {
+public class HDD extends BaseEntity {
+
+
+    @OneToOne
+    @JoinColumn
+    private Product product;
 
     @Column
     private String capacity;
 
-    @Builder(builderMethodName = "childBuilder")
-    public HDD(Long id, Long serialNumber, Double cost, String producer, Integer count, String capacity) {
-        super(id, serialNumber, cost, producer, count);
-        this.capacity = capacity;
-    }
 
 }

@@ -1,10 +1,7 @@
 package com.example.market.entity;
 
 import com.example.market.enums.ComputerType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -13,20 +10,14 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Computer extends BaseEntityParameter {
+public class Computer extends BaseEntity {
+
+    @OneToOne
+    @JoinColumn
+    private Product product;
 
     @Column
     @Enumerated(EnumType.STRING)
     private ComputerType type;
 
-    @Builder(builderMethodName = "childBuilder")
-    public Computer(Long id,
-                    Long serialNumber,
-                    Double cost,
-                    String producer,
-                    Integer count,
-                    ComputerType type) {
-        super(id, serialNumber, cost, producer, count);
-        this.type = type;
-    }
 }

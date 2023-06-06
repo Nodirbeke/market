@@ -1,5 +1,6 @@
 package com.example.market.model.request;
 
+import com.example.market.entity.Product;
 import com.example.market.enums.ComputerType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComputerCreateDTO extends BaseCreateDto{
+public class ComputerCreateDTO extends ProductCreateDTO {
+    private Product product;
 
     private ComputerType type;
 

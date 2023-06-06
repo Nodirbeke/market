@@ -2,7 +2,6 @@ package com.example.market.controller.base;
 
 import com.example.market.model.response.ResponseData;
 import com.example.market.model.base.BaseDTO;
-import com.example.market.entity.BaseEntity;
 import com.example.market.utils.BaseUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.util.List;
  * @param <E>  Entity
  * @param <K>  Key(identification)
  */
-public interface GenericCRUDController<CD extends BaseDTO, E extends BaseEntity, K extends Serializable> {
+public interface GenericCRUDController<CD extends BaseDTO, E, K extends Serializable> {
 
     @RequestMapping(value = BaseUtils.CREATE_PATH, method = RequestMethod.POST)
     ResponseData<E> create(CD createDTO);

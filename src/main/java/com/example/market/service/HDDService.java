@@ -14,8 +14,7 @@ import java.util.Optional;
 
 @Service
 public class HDDService extends AbstractService<HDDRepository>
-        implements GenericCRUDService<HDDCreateDTO, HDD, Long>,
-        GenericMapper<HDD, HDDCreateDTO> {
+        implements GenericCRUDService<HDDCreateDTO, HDD, Long> {
 
     public HDDService(HDDRepository repository) {
         super(repository);
@@ -23,7 +22,7 @@ public class HDDService extends AbstractService<HDDRepository>
 
     @Override
     public HDD create(HDDCreateDTO createDTO) {
-        HDD newHDD = toEntity(createDTO);
+        HDD newHDD = new HDD(createDTO.getProduct(), createDTO.getCapacity());
         return repository.save(newHDD);
     }
 
@@ -51,14 +50,4 @@ public class HDDService extends AbstractService<HDDRepository>
         return Boolean.TRUE;
     }
 
-    @Override
-    public HDD toEntity(HDDCreateDTO createDTO) {
-        return HDD.childBuilder()
-                .cost(createDTO.getCost())
-                .count(createDTO.getCount())
-                .producer(createDTO.getProducer())
-                .capacity(createDTO.getCapacity())
-                .serialNumber(createDTO.getSerialNumber())
-                .build();
-    }
 }

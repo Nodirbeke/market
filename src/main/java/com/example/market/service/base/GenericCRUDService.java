@@ -1,6 +1,5 @@
 package com.example.market.service.base;
 
-import com.example.market.entity.BaseEntity;
 import com.example.market.model.base.BaseDTO;
 
 import java.io.Serializable;
@@ -14,7 +13,7 @@ import java.util.List;
  * @param <K>  Key(identification)
  */
 public interface GenericCRUDService<CD extends BaseDTO,
-        E extends BaseEntity,
+        E,
         K extends Serializable>  {
 
     E create(CD createDTO);
