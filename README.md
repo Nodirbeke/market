@@ -4,6 +4,12 @@
 
 ## GET STARTED
 
+After cloning the repository you need to checkout to dev branch
+```sh
+git clone https://github.com/Nodirbeke/market.git
+git checkout dev
+```
+
 Project requires [Java](https://www.java.com/en/) v17+ and [Maven](https://maven.apache.org/)  to run.
 
 ```sh
