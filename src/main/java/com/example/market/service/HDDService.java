@@ -2,6 +2,7 @@ package com.example.market.service;
 
 import com.example.market.entity.HDD;
 import com.example.market.entity.Product;
+import com.example.market.enums.ProductType;
 import com.example.market.exception.NotFoundException;
 import com.example.market.mapper.GenericMapper;
 import com.example.market.model.request.HDDCreateDTO;
@@ -68,6 +69,7 @@ public class HDDService extends AbstractService<HDDRepository>
 
     @Override
     public HDD toEntity(HDDCreateDTO createDTO) {
+        createDTO.getProductCreateDTO().setProductType(ProductType.HDD);
         Product product = productService.toEntity(createDTO.getProductCreateDTO());
         return new HDD(product, createDTO.getCapacity());
     }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MonitorCreateDTO implements BaseDTO {
 
-    private ProductCreateDTO productId;
+    private ProductCreateDTO productCreateDTO;
     private Integer dyum;
 
 }

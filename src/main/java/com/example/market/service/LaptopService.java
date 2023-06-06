@@ -2,6 +2,7 @@ package com.example.market.service;
 
 import com.example.market.entity.Laptop;
 import com.example.market.entity.Product;
+import com.example.market.enums.ProductType;
 import com.example.market.exception.NotFoundException;
 import com.example.market.mapper.GenericMapper;
 import com.example.market.model.request.LaptopCreateDTO;
@@ -68,6 +69,7 @@ public class LaptopService extends AbstractService<LaptopRepository>
 
     @Override
     public Laptop toEntity(LaptopCreateDTO createDTO) {
+        createDTO.getProductCreateDTO().setProductType(ProductType.LAPTOP);
         Product product = productService.toEntity(createDTO.getProductCreateDTO());
         return new Laptop(product, createDTO.getLaptopSize());
     }

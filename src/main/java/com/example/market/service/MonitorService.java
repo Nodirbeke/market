@@ -2,6 +2,7 @@ package com.example.market.service;
 
 import com.example.market.entity.Monitor;
 import com.example.market.entity.Product;
+import com.example.market.enums.ProductType;
 import com.example.market.exception.NotFoundException;
 import com.example.market.mapper.GenericMapper;
 import com.example.market.model.request.MonitorCreateDTO;
@@ -30,7 +31,7 @@ public class MonitorService extends AbstractService<MonitorRepository>
     @Override
     @Transactional
     public Monitor create(MonitorCreateDTO createDTO) {
-        Product product = productService.create(createDTO.getProductId());
+        Product product = productService.create(createDTO.getProductCreateDTO());
         Monitor creatingMonitor = new Monitor(product, createDTO.getDyum());
         Monitor newMonitor = repository.save(creatingMonitor);
         return newMonitor;
@@ -71,7 +72,8 @@ public class MonitorService extends AbstractService<MonitorRepository>
 
     @Override
     public Monitor toEntity(MonitorCreateDTO createDTO) {
-        Product product = productService.toEntity(createDTO.getProductId());
+        createDTO.getProductCreateDTO().setProductType(ProductType.COMPUTER);
+        Product product = productService.toEntity(createDTO.getProductCreateDTO());
         return new Monitor(product, createDTO.getDyum());
     }
 }
