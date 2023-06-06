@@ -6,6 +6,8 @@ import com.example.market.model.request.ComputerCreateDTO;
 import com.example.market.model.response.ResponseData;
 import com.example.market.entity.Computer;
 import com.example.market.service.ComputerService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +31,11 @@ public class ComputerController extends AbstractController<ComputerService>
     @Override
     public ResponseData<Computer> get(Long id) {
         return new ResponseData<>(service.get(id));
+    }
+
+    @GetMapping("/get-by-product-id/{id}")
+    public ResponseData<Computer> getByProductId(@PathVariable Long id) {
+        return new ResponseData<>(service.getByProductId(id));
     }
 
     @Override

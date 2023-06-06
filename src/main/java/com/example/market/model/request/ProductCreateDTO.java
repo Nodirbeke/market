@@ -9,8 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductCreateDTO implements BaseDTO {
 
     private Long serialNumber;
@@ -21,11 +19,6 @@ public class ProductCreateDTO implements BaseDTO {
 
     private Integer count;
 
-    private ProductType type;
-
-    private MonitorCreateDTO monitorCreateDTO;
-    private HDDCreateDTO hddCreateDTO;
-    private LaptopCreateDTO laptopCreateDTO;
-    private ComputerCreateDTO computerCreateDTO;
+    private ProductType productType;
 
 }

@@ -1,6 +1,7 @@
 package com.example.market.entity;
 
 import com.example.market.enums.ProductType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,9 +9,9 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-public class Product extends BaseEntity {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Product extends Auditable {
 
     @Column
     private Long serialNumber;
@@ -24,18 +25,15 @@ public class Product extends BaseEntity {
     @Column
     private Integer count;
 
+    @Column
+    @Enumerated(EnumType.STRING)
     private ProductType productType;
 
-    @OneToOne
-    private Monitor monitor;
-
-    @OneToOne
-    private Laptop laptop;
-
-    @OneToOne
-    private HDD hdd;
-
-    @OneToOne
-    private Computer computer;
-
+    public Product(Long serialNumber, Double cost, String producer, Integer count, ProductType productType) {
+        this.serialNumber = serialNumber;
+        this.cost = cost;
+        this.producer = producer;
+        this.count = count;
+        this.productType = productType;
+    }
 }

@@ -10,10 +10,10 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Computer extends BaseEntity {
+public class Computer extends Auditable {
 
-    @OneToOne
     @JoinColumn
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Product product;
 
     @Column

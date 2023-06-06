@@ -6,6 +6,8 @@ import com.example.market.entity.HDD;
 import com.example.market.model.request.HDDCreateDTO;
 import com.example.market.model.response.ResponseData;
 import com.example.market.service.HDDService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +29,12 @@ public class HDDController extends AbstractController<HDDService>
     @Override
     public ResponseData<HDD> get(Long id) {
         return new ResponseData<>(service.get(id));
+    }
+
+
+    @GetMapping("/get-by-product-id/{id}")
+    public ResponseData<HDD> getByProductId(@PathVariable Long id) {
+        return new ResponseData<>(service.getByProductId(id));
     }
 
     @Override

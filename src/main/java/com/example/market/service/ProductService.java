@@ -1,6 +1,7 @@
 package com.example.market.service;
 
 import com.example.market.entity.*;
+import com.example.market.enums.ProductType;
 import com.example.market.exception.NotFoundException;
 import com.example.market.mapper.GenericMapper;
 import com.example.market.model.request.ProductCreateDTO;
@@ -35,89 +36,33 @@ public class ProductService extends AbstractService<ProductRepository>
 
     @Override
     public Product create(ProductCreateDTO createDTO) {
-        Product computer = toEntity(createDTO);
-        Product product = repository.save(computer);
-        Product newProduct = createProductType(createDTO, product);
+        Product computer = new Product(createDTO.getSerialNumber(),
+                createDTO.getCost(),
+                createDTO.getProducer(),
+                createDTO.getCount(),
+                createDTO.getProductType());
+        Product newProduct = repository.save(computer);
         return newProduct;
     }
-
-    private Product createProductType(ProductCreateDTO createDTO, Product product) {
-        switch (createDTO.getType()) {
-            case HDD -> {
-                createDTO.getHddCreateDTO().setProduct(product);
-                HDD hdd = hddService.create(createDTO.getHddCreateDTO());
-                product.setHdd(hdd);
-                return product;
-            }
-            case LAPTOP -> {
-                createDTO.getLaptopCreateDTO().setProduct(product);
-                Laptop laptop = laptopService.create(createDTO.getLaptopCreateDTO());
-                product.setLaptop(laptop);
-                return product;
-            }
-            case MONITOR -> {
-                createDTO.getMonitorCreateDTO().setProduct(product);
-                Monitor monitor = monitorService.create(createDTO.getMonitorCreateDTO());
-                product.setMonitor(monitor);
-                return product;
-            }
-            case COMPUTER -> {
-                createDTO.getComputerCreateDTO().setProduct(product);
-                Computer computer = computerService.create(createDTO.getComputerCreateDTO());
-                product.setComputer(computer);
-                return product;
-            }
-            default -> throw new RuntimeException("UNSUPPORTED_PRODUCT_TYPE");
-        }
-    }
-
-       private List setLaptop(ProductCreateDTO createDTO, Product product) {
-        return switch (createDTO.getType()) {
-            case HDD -> {
-                 hddService.list();
-                 }
-            case LAPTOP -> {
-                createDTO.getLaptopCreateDTO().setProduct(product);
-                Laptop laptop = laptopService.create(createDTO.getLaptopCreateDTO());
-                product.setLaptop(laptop);
-                return product;
-            }
-            case MONITOR -> {
-                createDTO.getMonitorCreateDTO().setProduct(product);
-                Monitor monitor = monitorService.create(createDTO.getMonitorCreateDTO());
-                product.setMonitor(monitor);
-                return product;
-            }
-            case COMPUTER -> {
-                createDTO.getComputerCreateDTO().setProduct(product);
-                Computer computer = computerService.create(createDTO.getComputerCreateDTO());
-                product.setComputer(computer);
-                return product;
-            }
-            default -> throw new RuntimeException("UNSUPPORTED_PRODUCT_TYPE");
-        }
-    }
-
-
 
     @Override
     @Transactional
     public Product get(Long key) {
         Optional<Product> computerOptional = repository.findById(key);
-        return computerOptional.orElseThrow(() -> new NotFoundException("COMPUTER_NOT_FOUND"));
+        return computerOptional.orElseThrow(() -> new NotFoundException("PRODUCT_NOT_FOUND"));
     }
 
     @Override
     public List<Product> list() {
-        List<Product> computers = repository.findAll();
-        return computers;
+        List<Product> products = repository.findAll();
+        return products;
     }
 
     @Override
     public Product update(Product updatingEntity) {
         get(updatingEntity.getId());
         Product updatedProduct = repository.save(updatingEntity);
-        return Product;
+        return updatedProduct;
     }
 
     @Override
@@ -126,14 +71,32 @@ public class ProductService extends AbstractService<ProductRepository>
         return Boolean.TRUE;
     }
 
+
+    public List getAllByProductType(ProductType type) {
+        switch (type) {
+            case COMPUTER -> {
+                return computerService.list();
+            }
+            case MONITOR -> {
+                return monitorService.list();
+            }
+            case HDD -> {
+                return hddService.list();
+            }
+            case LAPTOP -> {
+                return laptopService.list();
+            }
+            default -> throw new RuntimeException("UNSUPPORTED_PRODUCT_TYPE");
+        }
+
+    }
+
     @Override
     public Product toEntity(ProductCreateDTO createDTO) {
-        return Product.childBuilder()
-                .cost(createDTO.getCost())
-                .type(createDTO.getType())
-                .count(createDTO.getCount())
-                .producer(createDTO.getProducer())
-                .serialNumber(createDTO.getSerialNumber())
-                .build();
+        return new Product(createDTO.getSerialNumber(),
+                createDTO.getCost(),
+                createDTO.getProducer(),
+                createDTO.getCount(),
+                createDTO.getProductType());
     }
 }

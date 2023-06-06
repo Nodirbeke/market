@@ -4,6 +4,6 @@ public enum ComputerType {
     
     DESKTOP,
     NETTOP,
-    MONOBLOCK
+    MONOBLOCK;
 
 }

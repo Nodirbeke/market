@@ -1,10 +1,7 @@
 package com.example.market.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -13,11 +10,11 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class HDD extends BaseEntity {
+public class HDD extends Auditable {
 
 
-    @OneToOne
     @JoinColumn
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Product product;
 
     @Column

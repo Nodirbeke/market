@@ -1,7 +1,7 @@
 package com.example.market.model.request;
 
-import com.example.market.entity.Product;
 import com.example.market.enums.LaptopSize;
+import com.example.market.model.base.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +11,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LaptopCreateDTO extends ProductCreateDTO {
-    private Product product;
+public class LaptopCreateDTO implements BaseDTO {
+
+    private ProductCreateDTO productCreateDTO;
 
     private LaptopSize laptopSize;
 

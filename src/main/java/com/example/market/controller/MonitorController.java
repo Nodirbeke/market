@@ -6,8 +6,7 @@ import com.example.market.entity.Monitor;
 import com.example.market.model.request.MonitorCreateDTO;
 import com.example.market.model.response.ResponseData;
 import com.example.market.service.MonitorService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +27,11 @@ public class MonitorController extends AbstractController<MonitorService>
     @Override
     public ResponseData<Monitor> get(Long id) {
         return new ResponseData<>(service.get(id));
+    }
+
+    @GetMapping("/get-by-product-id/{id}")
+    public ResponseData<Monitor> getByProductId(@PathVariable Long id) {
+        return new ResponseData<>(service.getByProductId(id));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.market.model.request;
 
-import com.example.market.entity.Product;
+import com.example.market.model.base.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MonitorCreateDTO  {
+public class MonitorCreateDTO implements BaseDTO {
 
-    private Product product;
-    private Integer diameter;
+    private ProductCreateDTO productId;
+    private Integer dyum;
 
 }
